@@ -61,7 +61,7 @@ const tempFontColor = () => {
     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
         currentFontColor = '#ff7f50';
     } else if (currentTemperature >= 80) {
-        currentFontColor = '#c71585';
+        currentFontColor = '#ff335a';
     }
     setFontColor.style.color = currentFontColor;
 };
@@ -82,22 +82,35 @@ const tempLandscape = () => {
     setLandscape.textContent = currentLandscape;
 };
 
+const cityHeader = () => {
+    const cityNameInput = document.getElementById('cityNameInput');
+    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
+    
+    cityHeaderElement.innerText = cityNameInput.value;
+};
+
+const resetCityName = () => {
+    const cityNameInput = document.getElementById('cityNameInput');
+    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
+    
+    cityNameInput.value = ''; 
+    cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
+};
+
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
     increaseTempButton.addEventListener('click', addDegree);
 
     const decreaseTempButton = document.querySelector('#decreaseTempControl');
     decreaseTempButton.addEventListener('click', subtractDegree);
+
+    const cityNameInput = document.querySelector('#cityNameInput');
+    const cityNameResetButton = document.querySelector('#cityNameReset');
+
+    cityNameInput.addEventListener('input', cityHeader);
+
+    cityNameResetButton.addEventListener('click', resetCityName);
+    
 };
-
-
-const cityInput = document.getElementById('cityNameInput');
-const cityDisplay = document.getElementById('cityDisplay');
-
-cityInput.addEventListener('input', function() {
-    cityDisplay.textContent = cityInput.value;
-});
-
-
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
