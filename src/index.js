@@ -1,7 +1,7 @@
 let currentTemperature = 0;
 
 const updateTemperatureDisplay = () => {
-    const tempValue = document.getElementById('currentTempButton');
+    const tempValue = document.getElementById('tempValue');
     tempValue.textContent = currentTemperature;
     tempBackgroundColor();
     tempFontColor();
@@ -14,7 +14,7 @@ const updateLandscape = () => {
 }
 
 const addDegree = () => {
-    const increaseTemp = document.getElementById('currentTempButton');
+    const increaseTemp = document.getElementById('tempValue');
     currentTemperature += 1;
     increaseTemp.textContent = currentTemperature;
     updateTemperatureDisplay();
@@ -23,7 +23,7 @@ const addDegree = () => {
 };
 
 const subtractDegree = () => {
-    const decreaseTemp = document.getElementById('currentTempButton');
+    const decreaseTemp = document.getElementById('tempValue');
     currentTemperature -= 1;
     decreaseTemp.textContent = currentTemperature;
     updateTemperatureDisplay();
@@ -49,7 +49,7 @@ const tempBackgroundColor = () => {
 };
 
 const tempFontColor = () => {
-    const setFontColor = document.getElementById('currentTempButton');
+    const setFontColor = document.getElementById('tempValue');
     let currentFontColor;
 
     if (currentTemperature <= 49) {
