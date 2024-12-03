@@ -90,4 +90,14 @@ const registerEventHandlers = () => {
     decreaseTempButton.addEventListener('click', subtractDegree);
 };
 
+
+const cityInput = document.getElementById('cityNameInput');
+const cityDisplay = document.getElementById('cityDisplay');
+
+cityInput.addEventListener('input', function() {
+    cityDisplay.textContent = cityInput.value;
+});
+
+
+
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
