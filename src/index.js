@@ -82,7 +82,7 @@ const tempLandscape = () => {
     setLandscape.textContent = currentLandscape;
 };
 
-const dynamicCityHeader = () => {
+const dynamicCityNameHeader = () => {
     const cityNameInput = document.getElementById('cityNameInput');
     const cityHeaderElement = document.getElementById('defaultHeaderCityName');
     
@@ -97,50 +97,38 @@ const dynamicCityHeader = () => {
 //     cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
 // };
 
-
-// const setCityLocation = () => {
-//     const cityNameInput = document.getElementById('cityNameInput');
-    
-// }
-
-// const tempButton = () => {
-//     const currentTempButton = document.getElementById('currentTempButton')
-
-// }
-
 const fetchCityTemperature = () => {
     const cityNameInput = document.getElementById('cityNameInput'); 
     const city = cityNameInput.value.trim(); 
-    
-    if (city) { // If a city is provided
-        
-        fetch(`http://localhost:5000/get_weather?city=${encodeURIComponent(city)}`)
+
+    if (city) { 
+        fetch(`http://localhost:5000/location?q=${encodeURIComponent(city)}`)
             .then(response => response.json())
             .then(data => {
-                                currentTemperature = data.temperature;
+                if (data[0]) {
+                    const latitude = data[0].lat;
+                    const longitude = data[0].lon;
+
+                    return fetch(`http://localhost:5000/weather?lat=${latitude}&lon=${longitude}`);
+                } else {
+                    throw new Error('City not found');
+                }
+            })
+            .then(response => response.json())
+            .then(weatherData => {
+                currentTemperature = weatherData.main.temp;
                 updateTemperatureDisplay();
                 updateLandscape();
-                console.log(data); 
+                console.log(weatherData); 
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
+                alert('An error occurred. Please try again.');
             });
     } else {
         alert('Please enter a city name');
     }
 };
-
-// const tempButton = () => {
-//     const cityNameInput = document.getElementById('cityNameInput').value;
-
-//     if (cityNameInput.trim()) {
-    
-//         findLatitudeAndLongitude(cityNameInput);
-//     } else {
-//         console.log('Please enter a city name.');
-//     }
-// };
-
 
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
@@ -152,7 +140,7 @@ const registerEventHandlers = () => {
     const cityNameInput = document.querySelector('#cityNameInput');
     // const cityNameResetButton = document.querySelector('#cityNameReset');
 
-    cityNameInput.addEventListener('input', dynamicCityHeader);
+    cityNameInput.addEventListener('input', dynamicCityNameHeader);
     // cityNameResetButton.addEventListener('click', resetCityName);
 
     const searchTempButton = document.getElementById('currentTempButton'); 
@@ -160,6 +148,3 @@ const registerEventHandlers = () => {
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
-
-
-
