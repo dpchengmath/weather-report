@@ -102,24 +102,49 @@ const fetchCityTemperature = () => {
     const city = cityNameInput.value.trim(); 
 
     if (city) { 
+        console.log(`Fetching city: ${city}`);
         fetch(`http://localhost:5000/location?q=${encodeURIComponent(city)}`)
-            .then(response => response.json())
+            .then(response => {
+                console.log(`Location API Response Status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch city location: ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                if (data[0]) {
-                    const latitude = data[0].lat;
-                    const longitude = data[0].lon;
-
+                console.log('Location Data:', data);
+                
+                // Ensure there are results and extract the first one
+                if (data && data.length > 0) {
+                    const firstResult = data[0];  // Using the first result as the location
+                    const latitude = firstResult.lat;
+                    const longitude = firstResult.lon;
+                    console.log(`Coordinates: lat=${latitude}, lon=${longitude}`);
+                    
+                    // Now fetch weather data
                     return fetch(`http://localhost:5000/weather?lat=${latitude}&lon=${longitude}`);
                 } else {
                     throw new Error('City not found');
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log(`Weather API Response Status: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch weather data: ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(weatherData => {
-                currentTemperature = weatherData.main.temp;
-                updateTemperatureDisplay();
-                updateLandscape();
-                console.log(weatherData); 
+                console.log('Weather Data:', weatherData);
+                
+                // Check if the temperature data exists
+                if (weatherData.main && weatherData.main.temp) {
+                    currentTemperature = weatherData.main.temp;
+                    updateTemperatureDisplay();
+                    updateLandscape();
+                } else {
+                    throw new Error('Temperature data not found');
+                }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
