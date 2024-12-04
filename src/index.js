@@ -82,20 +82,32 @@ const tempLandscape = () => {
     setLandscape.textContent = currentLandscape;
 };
 
-const cityHeader = () => {
+const dynamicCityHeader = () => {
     const cityNameInput = document.getElementById('cityNameInput');
     const cityHeaderElement = document.getElementById('defaultHeaderCityName');
     
     cityHeaderElement.innerText = cityNameInput.value;
 };
 
-const resetCityName = () => {
-    const cityNameInput = document.getElementById('cityNameInput');
-    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
+// const resetCityName = () => {
+//     const cityNameInput = document.getElementById('cityNameInput');
+//     const cityHeaderElement = document.getElementById('defaultHeaderCityName');
     
-    cityNameInput.value = ''; 
-    cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
-};
+//     cityNameInput.value = ''; 
+//     cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
+// };
+
+
+// const setCityLocation = () => {
+//     const cityNameInput = document.getElementById('cityNameInput');
+    
+// }
+
+const tempButton = () => {
+    const currentTempButton = document.getElementById('currentTempButton')
+
+}
+
 
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
@@ -105,12 +117,17 @@ const registerEventHandlers = () => {
     decreaseTempButton.addEventListener('click', subtractDegree);
 
     const cityNameInput = document.querySelector('#cityNameInput');
-    const cityNameResetButton = document.querySelector('#cityNameReset');
+    // const cityNameResetButton = document.querySelector('#cityNameReset');
 
-    cityNameInput.addEventListener('input', cityHeader);
+    cityNameInput.addEventListener('input', dynamicCityHeader);
+    // cityNameResetButton.addEventListener('click', resetCityName);
 
-    cityNameResetButton.addEventListener('click', resetCityName);
+    const searchTempButton = document.querySelector('#currentTempButton');
+    searchTempButton.addEventListener('click', tempButton)
     
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
+
+
+
