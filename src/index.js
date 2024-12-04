@@ -103,10 +103,43 @@ const dynamicCityHeader = () => {
     
 // }
 
-const tempButton = () => {
-    const currentTempButton = document.getElementById('currentTempButton')
+// const tempButton = () => {
+//     const currentTempButton = document.getElementById('currentTempButton')
 
-}
+// }
+
+const fetchCityTemperature = () => {
+    const cityNameInput = document.getElementById('cityNameInput'); 
+    const city = cityNameInput.value.trim(); 
+    
+    if (city) { // If a city is provided
+        
+        fetch(`http://localhost:5000/get_weather?city=${encodeURIComponent(city)}`)
+            .then(response => response.json())
+            .then(data => {
+                                currentTemperature = data.temperature;
+                updateTemperatureDisplay();
+                updateLandscape();
+                console.log(data); 
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    } else {
+        alert('Please enter a city name');
+    }
+};
+
+// const tempButton = () => {
+//     const cityNameInput = document.getElementById('cityNameInput').value;
+
+//     if (cityNameInput.trim()) {
+    
+//         findLatitudeAndLongitude(cityNameInput);
+//     } else {
+//         console.log('Please enter a city name.');
+//     }
+// };
 
 
 const registerEventHandlers = () => {
@@ -122,9 +155,8 @@ const registerEventHandlers = () => {
     cityNameInput.addEventListener('input', dynamicCityHeader);
     // cityNameResetButton.addEventListener('click', resetCityName);
 
-    const searchTempButton = document.querySelector('#currentTempButton');
-    searchTempButton.addEventListener('click', tempButton)
-    
+    const searchTempButton = document.getElementById('currentTempButton'); 
+    searchTempButton.addEventListener('click', fetchCityTemperature);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
