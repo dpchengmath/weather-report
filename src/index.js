@@ -105,7 +105,7 @@ const fetchCityTemperature = () => {
                 const longitude = firstResult.lon;
                 console.log(`Coordinates: lat=${latitude}, lon=${longitude}`);
         
-                return axios.get(`http://127.0.0.1:5000/weather`, {
+                return axios.get(`https://ada-weather-report-proxy-server.onrender.com`, {
                     params:{
                         lat: latitude,
                         lon: longitude
