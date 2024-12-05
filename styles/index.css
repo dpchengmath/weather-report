@@ -15,7 +15,7 @@ margin: 2rem;
 }
 
 .header__header {
-color: white;
+color:#3E2F84;
 grid-column: span 3;
 display: flex;
 align-items: center;
@@ -46,7 +46,7 @@ background-color: #ccb3ff;
 }
 
 .temperature__section {
-color:white;
+color:#3E2F84;
 grid-row: 2;
 }
 
@@ -63,12 +63,12 @@ border-radius: 10px
 }
 
 .sky__section {
-color: white;
+color: #3E2F84;
 grid-row: 3;
 }
 
 .city-name__section {
-color: white;
+color: #3E2F84;
 grid-row: 4;
 }
 
@@ -100,7 +100,7 @@ align-items: center;
 }
 
 .garden__section > h2 {
-color: white;
+color: #3E2F84;
 }
 
 .garden__content {
