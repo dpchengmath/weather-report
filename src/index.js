@@ -7,12 +7,6 @@ const updateTemperatureDisplay = () => {
     tempFontColor();
 };
 
-const updateLandscape = () => {
-    const setLandscape = document.getElementById('landscape');
-    setLandscape.textContent = currentLandscape;
-    tempLandscape();
-}
-
 const addDegree = () => {
     const increaseTemp = document.getElementById('tempValue');
     currentTemperature += 1;
@@ -66,6 +60,7 @@ const tempFontColor = () => {
     setFontColor.style.color = currentFontColor;
 };
 
+
 const tempLandscape = () => {
     const setLandscape = document.getElementById('landscape');
     let currentLandscape = '';
@@ -81,6 +76,7 @@ const tempLandscape = () => {
     }
     setLandscape.textContent = currentLandscape;
 };
+
 
 const dynamicCityNameHeader = () => {
     const cityNameInput = document.getElementById('cityNameInput');
@@ -103,13 +99,13 @@ const dynamicCityNameHeader = () => {
 
 const fetchCityTemperature = () => {
     const cityNameInput = document.getElementById('cityNameInput'); 
-    const city = cityNameInput.value.trim(); 
+    const cityName = cityNameInput.value.trim(); 
 
-    if (city) { 
-        console.log(`Fetching city: ${city}`);
+    if (cityName) { 
+        console.log(`Fetching city: ${cityName}`);
         axios.get(`http://127.0.0.1:5000/location`, {
             params: {
-                q: city
+                q: cityName
             }
         })
         .then(response => {
@@ -127,21 +123,23 @@ const fetchCityTemperature = () => {
                     }
                 })
         })
-        .then(weatherResponse => {
-            console.log('Weather Response:', weatherResponse);
-
-            if (weatherResponse.data && weatherResponse.data.main && weatherResponse.data.main.temp) {
-                currentTemperature = weatherResponse.data.main.temp;
-                updateTemperatureDisplay();  
-                updateLandscape();            
-            } else {
-                console.error('Weather data is missing expected properties.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            alert('An error occurred. Please try again.');
-        });
+            .then(weatherResponse => {
+                console.log('Weather Response:', weatherResponse);
+                const firstWeatherResult = weatherResponse.data.main.temp;
+                const kToF = (firstWeatherResult - 275.15) * 1.8 + 32;
+                console.log(Math.floor(kToF))
+                
+                const cityTempValue = document.getElementById('tempValue'); 
+                const cityTemp = Math.floor(kToF); 
+                cityTempValue.innerText = cityTemp;
+        
+                // updateTemperatureDisplay();
+                tempLandscape();
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                alert('An error occurred. Please try again.');
+            });
     } else {
         alert('Please enter a city name');
     }
@@ -161,7 +159,13 @@ const registerEventHandlers = () => {
     // cityNameResetButton.addEventListener('click', resetCityName);
 
     const searchTempButton = document.getElementById('currentTempButton'); 
+    searchTempButton.addEventListener('click', fetchCityTemperature)
+    
+    const updateDegree = document.getElementById('tempValue'); 
     searchTempButton.addEventListener('click', fetchCityTemperature);
+
+    
+
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
