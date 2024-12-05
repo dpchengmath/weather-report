@@ -49,9 +49,9 @@ const tempFontColor = () => {
     const setFontColor = document.getElementById('tempValue');
     let currentFontColor;
 
-    if (currentTemperature <= 39) {
+    if (currentTemperature <= 49) {
         currentFontColor = '#00ced1';
-    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
+    } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
         currentFontColor = '#00ff7f';
     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
         currentFontColor = '#ffd700';
@@ -81,38 +81,18 @@ const tempLandscape = () => {
 };
 
 
-// const citySky = () => {
-//     const setSky = document.getElementById('sky');
-//     let currentCitySky = '';
-
-//     if (skyOption = 'Sunny') {
-//         currentCitySky = '"☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️"';
-//     } else if (skyOption = 'Cloudy') {
-//         currentCitySky = '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️';
-//     } else if (skyOption = 'Rainy') {
-//         currentCitySky = '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
-//     } else if (skyOption = 'Snowy') {
-//         currentCitySky= '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
-//     }
-//     setSky.textContent = currentCitySky;
-// };
-
-
-
-
-
 const citySky = (skyOption) => {
     const setSky = document.getElementById('sky');
     let currentCitySky = '';
 
-    if (skyOption === 'Sunny') {
-        currentCitySky === '"☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️"';
-    } else if (skyOption === 'Cloudy') {
-        currentCitySky === '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️';
-    } else if (skyOption === 'Rainy') {
-        currentCitySky === '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
-    } else if (skyOption === 'Snowy') {
-        currentCitySky === '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
+    if (skyOption === 'sunny') {
+        currentCitySky = '☀️ ☁️ ☀️ ☀️ ☁️ ☀️ ☁️ ☀️ ☀️ ☁️ ☀️';
+    } else if (skyOption === 'cloudy') {
+        currentCitySky = '☁️☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️☁️';
+    } else if (skyOption === 'rainy') {
+        currentCitySky = '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
+    } else if (skyOption === 'snowy') {
+        currentCitySky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
     }
     setSky.textContent = currentCitySky;
 };
@@ -209,18 +189,16 @@ const registerEventHandlers = () => {
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
 
-    const SelectSkyOption = document.querySelector('.skySelect');
-    const currentCitySky = document.querySelector('.currentCitySky');
-    SelectSkyOption.addEventListener('change', citySky);
-        currentCitySky.textContent = `${citySky.target.value}`;
+    const selectSkyOption = document.getElementById('skySelect'); 
+    // const currentCitySky = document.querySelector('.currentCitySky')[0];
+    // SelectSkyOption.addEventListener('change', citySky);
+    //     currentCitySky.textContent = `${citySky.target.value}`;
 
-
-
-
-    // const skySelect = document.querySelector('.skySelect');
-    //     skySelect.addEventListener('change', (event) => {
-    //         const selectedOption = event.target.value;
-    //         citySky(selectedOption);
+    selectSkyOption.addEventListener('change', (event) => {
+        const selectedOption = event.target.value;
+        console.log(selectedOption)
+        citySky(selectedOption);
+    });
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
