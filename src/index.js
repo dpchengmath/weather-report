@@ -151,6 +151,9 @@ const registerEventHandlers = () => {
 
     const selectSkyOption = document.getElementById('skySelect');
     selectSkyOption.addEventListener('change', citySky);
+
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
+
+
