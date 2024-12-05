@@ -11,14 +11,12 @@ const addDegree = () => {
     currentTemperature += 1;
     tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
-    tempLandscape();
 };
 
 const subtractDegree = () => {
     currentTemperature -= 1;
     tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
-    tempLandscape();
 };
 
 const tempColor = () => {
@@ -27,52 +25,42 @@ const tempColor = () => {
     const setFontColor = document.getElementById('tempValue');
     let currentColor;
 
+    const setLandscape = document.getElementById('landscape');
+    let currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
+
     if (currentTemperature <= 49) {
         currentColor = '#30849D';
     } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
         currentColor = '#50A63F';
     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
         currentColor = '#FEE086';
+        currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
         currentColor = '#F8B5A2';
+        currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     } else if (currentTemperature >= 80) {
         currentColor = '#E06767';
+        currentLandscape = '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
     }
     setBackgroundColor.style.backgroundColor = currentColor;
     setFontColor.style.color = currentColor;
-};
-
-const tempLandscape = () => {
-    const setLandscape = document.getElementById('landscape');
-    let currentLandscape = '';
-
-    if (currentTemperature <= 39) {
-        currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
-    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
-        currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-    } else if (currentTemperature >= 60 && currentTemperature <= 79 ) {
-        currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
-    } else if (currentTemperature >= 80) {
-        currentLandscape= '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
-    }
     setLandscape.textContent = currentLandscape;
 };
 
-const citySky = (event) => {
-    const selectedOption = event.target.value;
-    const elementSky = document.getElementById('sky');
+const citySky = (skyOption) => {
+    const setSky = document.getElementById('sky');
     let currentCitySky = '';
 
-    if (selectedOption === 'sunny') {
+    if (skyOption === 'sunny') {
         currentCitySky = '☀️ ☁️ ☀️ ☀️ ☁️ ☀️ ☁️ ☀️ ☀️ ☁️ ☀️';
-    } else if (selectedOption === 'cloudy') {
+    } else if (skyOption === 'cloudy') {
         currentCitySky = '☁️☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️☁️';
-    } else if (selectedOption === 'rainy') {
+    } else if (skyOption === 'rainy') {
         currentCitySky = '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
-    } else if (selectedOption === 'snowy') {
+    } else if (skyOption === 'snowy') {
         currentCitySky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
     }
-    elementSky.textContent = currentCitySky;
+    setSky.textContent = currentCitySky;
 };
 
 const cityNameInput = document.getElementById('cityNameInput');
@@ -149,8 +137,12 @@ const registerEventHandlers = () => {
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
 
-    const selectSkyOption = document.getElementById('skySelect');
-    selectSkyOption.addEventListener('change', citySky);
+    const selectSkyOption = document.getElementById('skySelect'); 
+    selectSkyOption.addEventListener('change', (event) => {
+        const selectedOption = event.target.value;
+        console.log(selectedOption)
+        citySky(selectedOption);
+    });
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
