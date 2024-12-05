@@ -181,10 +181,6 @@ const registerEventHandlers = () => {
     searchTempButton.addEventListener('click', fetchCityTemperature)
 
     const selectSkyOption = document.getElementById('skySelect'); 
-    // const currentCitySky = document.querySelector('.currentCitySky')[0];
-    // SelectSkyOption.addEventListener('change', citySky);
-    //     currentCitySky.textContent = `${citySky.target.value}`;
-
     selectSkyOption.addEventListener('change', (event) => {
         const selectedOption = event.target.value;
         console.log(selectedOption)
