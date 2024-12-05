@@ -98,15 +98,6 @@ const citySky = (skyOption) => {
 };
 
 
-
-
-
-
-
-
-
-
-
 const dynamicCityNameHeader = () => {
     const cityNameInput = document.getElementById('cityNameInput');
     const cityHeaderElement = document.getElementById('defaultHeaderCityName');
