@@ -145,6 +145,12 @@ const fetchCityTemperature = () => {
     }
 };
 
+const resetCityNameButton = () => {
+    const cityNameInput = document.getElementById('cityNameInput');
+    cityNameInput.innerText = 'Miami';
+    fetchCityTemperature();
+}
+
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
     increaseTempButton.addEventListener('click', addDegree);
@@ -164,8 +170,8 @@ const registerEventHandlers = () => {
     const updateDegree = document.getElementById('tempValue'); 
     searchTempButton.addEventListener('click', fetchCityTemperature);
 
-    
-
+    const resetCityName = document.querySelector('#cityNameReset')
+    resetCityName.addEventListener('click', resetCityNameButton);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);

@@ -25,45 +25,47 @@
 //   return axios.post(url, form, request_config);
 
 
-const axios = require('axios');
+// const axios = require('axios');
 
-const LOCATIONIQ_KEY = process.env['LOCATIONIQ_KEY'];
+// const LOCATIONIQ_KEY = process.env['LOCATIONIQ_KEY'];
 
-const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:5000/location', // Proxy base URL
-  params: {
-    key: LOCATIONIQ_KEY,
-    format: 'json'
-  }
-});
+// const apiClient = axios.create({
+//   baseURL: 'http://127.0.0.1:5000/location', // Proxy base URL
+//   params: {
+//     key: LOCATIONIQ_KEY,
+//     format: 'json'
+//   }
+// });
 
-const findLatitudeAndLongitude = (query) => {
-  let latitude, longitude;
-  apiClient.get('https://us1.locationiq.com/v1/search.php', {
-    params: { q: query }
-  })
-  .then((response) => {
-    latitude = response.data[0].lat;
-    longitude = response.data[0].lon;
-    console.log('success in findLatitudeAndLongitude!', latitude, longitude);
+// const findLatitudeAndLongitude = (query) => {
+//   let latitude, longitude;
+//   apiClient.get('https://us1.locationiq.com/v1/search.php', {
+//     params: { q: query }
+//   })
+//   .then((response) => {
+//     latitude = response.data[0].lat;
+//     longitude = response.data[0].lon;
+//     console.log('success in findLatitudeAndLongitude!', latitude, longitude);
 
-    findLocation(latitude, longitude);
-  })
-  .catch((error) => {
-    console.log('error in findLatitudeAndLongitude!', error.message);
-  });
-}
+//     findLocation(latitude, longitude);
+//   })
+//   .catch((error) => {
+//     console.log('error in findLatitudeAndLongitude!', error.message);
+//   });
+// }
 
-const findLocation = (latitude, longitude) => {
-  apiClient.get('https://us1.locationiq.com/v1/reverse.php', {
-    params: { lat: latitude, lon: longitude }
-  })
-  .then((response) => {
-    console.log('success in findLocation!', response.data);
-  })
-  .catch((error) => {
-    console.log('error in findLocation!', error.message);
-  });
-}
+// const findLocation = (latitude, longitude) => {
+//   apiClient.get('https://us1.locationiq.com/v1/reverse.php', {
+//     params: { lat: latitude, lon: longitude }
+//   })
+//   .then((response) => {
+//     console.log('success in findLocation!', response.data);
+//   })
+//   .catch((error) => {
+//     console.log('error in findLocation!', error.message);
+//   });
+// }
 
-findLatitudeAndLongitude('Seattle, Washington, USA');
+// findLatitudeAndLongitude('Seattle, Washington, USA');
+
+// axios.get(`http://127.0.0.1:5000/location?q=${encodeURIComponent(city)}`)
