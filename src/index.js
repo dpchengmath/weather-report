@@ -1,29 +1,25 @@
 let currentTemperature = 0;
 
+const tempValue = document.getElementById('tempValue');
+
 const updateTemperatureDisplay = () => {
-    const tempValue = document.getElementById('tempValue');
     tempValue.textContent = currentTemperature;
     tempColor();
 };
 
-
 const addDegree = () => {
-    const increaseTemp = document.getElementById('tempValue');
     currentTemperature += 1;
-    increaseTemp.textContent = currentTemperature;
+    tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
     tempLandscape();
 };
-
 
 const subtractDegree = () => {
-    const decreaseTemp = document.getElementById('tempValue');
     currentTemperature -= 1;
-    decreaseTemp.textContent = currentTemperature;
+    tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
     tempLandscape();
 };
-
 
 const tempColor = () => {
     const setBackgroundColor = document.getElementById('currentTempButton');
@@ -46,26 +42,6 @@ const tempColor = () => {
     setFontColor.style.color = currentColor;
 };
 
-
-// const tempFontColor = () => {
-//     const setFontColor = document.getElementById('tempValue');
-//     let currentFontColor;
-
-//     if (currentTemperature <= 49) {
-//         currentFontColor = '#00ced1';
-//     } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
-//         currentFontColor = '#00ff7f';
-//     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
-//         currentFontColor = '#ffd700';
-//     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
-//         currentFontColor = '#ff7f50';
-//     } else if (currentTemperature >= 80) {
-//         currentFontColor = '#ff335a';
-//     }
-//     setFontColor.style.color = currentFontColor;
-// };
-
-
 const tempLandscape = () => {
     const setLandscape = document.getElementById('landscape');
     let currentLandscape = '';
@@ -81,7 +57,6 @@ const tempLandscape = () => {
     }
     setLandscape.textContent = currentLandscape;
 };
-
 
 const citySky = (skyOption) => {
     const setSky = document.getElementById('sky');
@@ -99,26 +74,19 @@ const citySky = (skyOption) => {
     setSky.textContent = currentCitySky;
 };
 
+const cityNameInput = document.getElementById('cityNameInput');
+const cityHeaderElement = document.getElementById('defaultHeaderCityName');
 
 const dynamicCityNameHeader = () => {
-    const cityNameInput = document.getElementById('cityNameInput');
-    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
-    
     cityHeaderElement.innerText = cityNameInput.value;
 };
 
-
 const resetCityName = () => {
-    const cityNameInput = document.getElementById('cityNameInput');
-    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
-    
     cityNameInput.value = ''; 
     cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
 };
 
-
 const fetchCityTemperature = () => {
-    const cityNameInput = document.getElementById('cityNameInput'); 
     const cityName = cityNameInput.value.trim(); 
 
     if (cityName) { 
@@ -148,10 +116,9 @@ const fetchCityTemperature = () => {
                 const firstWeatherResult = weatherResponse.data.main.temp;
                 const kelvinToFahrenheit = (firstWeatherResult - 275.15) * 1.8 + 32;
                 console.log(Math.floor(kelvinToFahrenheit))
-                
-                const cityTempValue = document.getElementById('tempValue'); 
+                 
                 const cityTemp = Math.floor(kelvinToFahrenheit); 
-                cityTempValue.textContent = cityTemp;
+                tempValue.textContent = cityTemp;
 
                 currentTemperature = cityTemp;
                 updateTemperatureDisplay();
@@ -165,7 +132,6 @@ const fetchCityTemperature = () => {
         alert('Please enter a city name');
     }
 };
-
 
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
