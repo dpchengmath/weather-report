@@ -70,15 +70,61 @@ const tempLandscape = () => {
 
     if (currentTemperature <= 39) {
         currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
-    } else if (currentTemperature >= 40 && currentTemperature <= 64 ) {
+    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
         currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-    } else if (currentTemperature >= 65 && currentTemperature <= 79 ) {
+    } else if (currentTemperature >= 60 && currentTemperature <= 79 ) {
         currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     } else if (currentTemperature >= 80) {
         currentLandscape= '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
     }
     setLandscape.textContent = currentLandscape;
 };
+
+
+// const citySky = () => {
+//     const setSky = document.getElementById('sky');
+//     let currentCitySky = '';
+
+//     if (skyOption = 'Sunny') {
+//         currentCitySky = '"☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️"';
+//     } else if (skyOption = 'Cloudy') {
+//         currentCitySky = '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️';
+//     } else if (skyOption = 'Rainy') {
+//         currentCitySky = '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
+//     } else if (skyOption = 'Snowy') {
+//         currentCitySky= '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
+//     }
+//     setSky.textContent = currentCitySky;
+// };
+
+
+
+
+
+const citySky = (skyOption) => {
+    const setSky = document.getElementById('sky');
+    let currentCitySky = '';
+
+    if (skyOption === 'Sunny') {
+        currentCitySky === '"☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️ ☁️ ☀️"';
+    } else if (skyOption === 'Cloudy') {
+        currentCitySky === '☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️';
+    } else if (skyOption === 'Rainy') {
+        currentCitySky === '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
+    } else if (skyOption === 'Snowy') {
+        currentCitySky === '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
+    }
+    setSky.textContent = currentCitySky;
+};
+
+
+
+
+
+
+
+
+
 
 
 const dynamicCityNameHeader = () => {
@@ -127,11 +173,11 @@ const fetchCityTemperature = () => {
             .then(weatherResponse => {
                 console.log('Weather Response:', weatherResponse);
                 const firstWeatherResult = weatherResponse.data.main.temp;
-                const kToF = (firstWeatherResult - 275.15) * 1.8 + 32;
-                console.log(Math.floor(kToF))
+                const kelvinToFahrenheit = (firstWeatherResult - 275.15) * 1.8 + 32;
+                console.log(Math.floor(kelvinToFahrenheit))
                 
                 const cityTempValue = document.getElementById('tempValue'); 
-                const cityTemp = Math.floor(kToF); 
+                const cityTemp = Math.floor(kelvinToFahrenheit); 
                 cityTempValue.textContent = cityTemp;
 
                 currentTemperature = cityTemp;
@@ -162,9 +208,19 @@ const registerEventHandlers = () => {
 
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
-    
-    // const updateDegree = document.getElementById('tempValue'); 
-    // searchTempButton.addEventListener('click', fetchCityTemperature);
+
+    const SelectSkyOption = document.querySelector('.skySelect');
+    const currentCitySky = document.querySelector('.currentCitySky');
+    SelectSkyOption.addEventListener('change', citySky);
+        currentCitySky.textContent = `${citySky.target.value}`;
+
+
+
+
+    // const skySelect = document.querySelector('.skySelect');
+    //     skySelect.addEventListener('change', (event) => {
+    //         const selectedOption = event.target.value;
+    //         citySky(selectedOption);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
