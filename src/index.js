@@ -92,7 +92,7 @@ const fetchCityTemperature = () => {
 
     if (cityName) { 
         console.log(`Fetching city: ${cityName}`);
-        axios.get(`http://127.0.0.1:5000/location`, {
+        axios.get(`https://ada-weather-report-proxy-server.onrender.com`, {
             params: {
                 q: cityName
             }
