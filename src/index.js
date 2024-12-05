@@ -11,21 +11,28 @@ const addDegree = () => {
     currentTemperature += 1;
     tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
-    tempLandscape();
+    // tempLandscape();
 };
 
 const subtractDegree = () => {
     currentTemperature -= 1;
     tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
-    tempLandscape();
+    // tempLandscape();
 };
+
+
+
+
 
 const tempColor = () => {
     const setBackgroundColor = document.getElementById('currentTempButton');
 
     const setFontColor = document.getElementById('tempValue');
     let currentColor;
+    
+    const setLandscape = document.getElementById('landscape');
+    let currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
 
     if (currentTemperature <= 49) {
         currentColor = '#30849D';
@@ -33,28 +40,16 @@ const tempColor = () => {
         currentColor = '#50A63F';
     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
         currentColor = '#FEE086';
+        currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
         currentColor = '#F8B5A2';
+        currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     } else if (currentTemperature >= 80) {
         currentColor = '#E06767';
+        currentLandscape = '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
     }
     setBackgroundColor.style.backgroundColor = currentColor;
     setFontColor.style.color = currentColor;
-};
-
-const tempLandscape = () => {
-    const setLandscape = document.getElementById('landscape');
-    let currentLandscape = '';
-
-    if (currentTemperature <= 39) {
-        currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
-    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
-        currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-    } else if (currentTemperature >= 60 && currentTemperature <= 79 ) {
-        currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
-    } else if (currentTemperature >= 80) {
-        currentLandscape= '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
-    }
     setLandscape.textContent = currentLandscape;
 };
 
@@ -123,7 +118,7 @@ const fetchCityTemperature = () => {
 
                 currentTemperature = cityTemp;
                 updateTemperatureDisplay();
-                tempLandscape();
+                // tempLandscape();
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
