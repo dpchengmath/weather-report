@@ -7,14 +7,15 @@ const updateTemperatureDisplay = () => {
     tempFontColor();
 };
 
+
 const addDegree = () => {
     const increaseTemp = document.getElementById('tempValue');
     currentTemperature += 1;
     increaseTemp.textContent = currentTemperature;
     updateTemperatureDisplay();
     tempLandscape();
-
 };
+
 
 const subtractDegree = () => {
     const decreaseTemp = document.getElementById('tempValue');
@@ -23,6 +24,7 @@ const subtractDegree = () => {
     updateTemperatureDisplay();
     tempLandscape();
 };
+
 
 const tempBackgroundColor = () => {
     const setBackgroundColor = document.getElementById('currentTempButton');
@@ -42,13 +44,14 @@ const tempBackgroundColor = () => {
     setBackgroundColor.style.backgroundColor = currentBackgroundColor;
 };
 
+
 const tempFontColor = () => {
     const setFontColor = document.getElementById('tempValue');
     let currentFontColor;
 
-    if (currentTemperature <= 49) {
+    if (currentTemperature <= 39) {
         currentFontColor = '#00ced1';
-    } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
+    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
         currentFontColor = '#00ff7f';
     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
         currentFontColor = '#ffd700';
@@ -65,11 +68,11 @@ const tempLandscape = () => {
     const setLandscape = document.getElementById('landscape');
     let currentLandscape = '';
 
-    if (currentTemperature <= 59) {
+    if (currentTemperature <= 39) {
         currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
-    } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
+    } else if (currentTemperature >= 40 && currentTemperature <= 64 ) {
         currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-    } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
+    } else if (currentTemperature >= 65 && currentTemperature <= 79 ) {
         currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     } else if (currentTemperature >= 80) {
         currentLandscape= '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
@@ -85,17 +88,15 @@ const dynamicCityNameHeader = () => {
     cityHeaderElement.innerText = cityNameInput.value;
 };
 
-// const resetCityName = () => {
-//     const cityNameInput = document.getElementById('cityNameInput');
-//     const cityHeaderElement = document.getElementById('defaultHeaderCityName');
+
+const resetCityName = () => {
+    const cityNameInput = document.getElementById('cityNameInput');
+    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
     
-//     cityNameInput.value = ''; 
-//     cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
-// };
+    cityNameInput.value = ''; 
+    cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
+};
 
-// const axios = require('axios');
-
-// axios.get('http://127.0.0.1:5000/location')
 
 const fetchCityTemperature = () => {
     const cityNameInput = document.getElementById('cityNameInput'); 
@@ -131,9 +132,10 @@ const fetchCityTemperature = () => {
                 
                 const cityTempValue = document.getElementById('tempValue'); 
                 const cityTemp = Math.floor(kToF); 
-                cityTempValue.innerText = cityTemp;
-        
-                // updateTemperatureDisplay();
+                cityTempValue.textContent = cityTemp;
+
+                currentTemperature = cityTemp;
+                updateTemperatureDisplay();
                 tempLandscape();
             })
             .catch(error => {
@@ -145,6 +147,7 @@ const fetchCityTemperature = () => {
     }
 };
 
+
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
     increaseTempButton.addEventListener('click', addDegree);
@@ -152,20 +155,16 @@ const registerEventHandlers = () => {
     const decreaseTempButton = document.querySelector('#decreaseTempControl');
     decreaseTempButton.addEventListener('click', subtractDegree);
 
-    const cityNameInput = document.querySelector('#cityNameInput');
-    // const cityNameResetButton = document.querySelector('#cityNameReset');
-
     cityNameInput.addEventListener('input', dynamicCityNameHeader);
-    // cityNameResetButton.addEventListener('click', resetCityName);
+    
+    const cityNameReset = document.querySelector('#cityNameReset');
+    cityNameReset.addEventListener('click', resetCityName);
 
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
     
-    const updateDegree = document.getElementById('tempValue'); 
-    searchTempButton.addEventListener('click', fetchCityTemperature);
-
-    
-
+    // const updateDegree = document.getElementById('tempValue'); 
+    // searchTempButton.addEventListener('click', fetchCityTemperature);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);

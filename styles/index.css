@@ -10,7 +10,7 @@ grid-gap: 1rem;
 
 font-family: "Rubik", sans-serif;
 font-size: 18px;
-background-color: #1b69f9;
+background-color: #ffafd3;
 margin: 2rem;
 }
 
@@ -42,15 +42,16 @@ content: "✨";
 .city-name__section {
 border-radius: 8px;
 padding: 2rem;
-background-color: white;
+background-color: #ccb3ff;
 }
 
 .temperature__section {
+    color:white;
 grid-row: 2;
 }
 
 .temperature__section button {
-    background-color: #1b69f9;
+    background-color: #ac8aff;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -62,10 +63,12 @@ grid-row: 2;
 }
 
 .sky__section {
+    color: white;
 grid-row: 3;
 }
 
 .city-name__section {
+    color: white;
 grid-row: 4;
 }
 
@@ -116,7 +119,7 @@ font-size: 2em;
 
 .city-name__reset-btn {
 border: 0;
-background-color: #1655cc;
+background-color: #ac8aff;
 color: white;
 border-radius: 8px;
 padding: 1rem;
