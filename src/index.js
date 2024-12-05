@@ -58,20 +58,21 @@ const tempLandscape = () => {
     setLandscape.textContent = currentLandscape;
 };
 
-const citySky = (skyOption) => {
-    const setSky = document.getElementById('sky');
+const citySky = (event) => {
+    const selectedOption = event.target.value;
+    const elementSky = document.getElementById('sky');
     let currentCitySky = '';
 
-    if (skyOption === 'sunny') {
+    if (selectedOption === 'sunny') {
         currentCitySky = '☀️ ☁️ ☀️ ☀️ ☁️ ☀️ ☁️ ☀️ ☀️ ☁️ ☀️';
-    } else if (skyOption === 'cloudy') {
+    } else if (selectedOption === 'cloudy') {
         currentCitySky = '☁️☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️☁️';
-    } else if (skyOption === 'rainy') {
+    } else if (selectedOption === 'rainy') {
         currentCitySky = '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
-    } else if (skyOption === 'snowy') {
+    } else if (selectedOption === 'snowy') {
         currentCitySky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
     }
-    setSky.textContent = currentCitySky;
+    elementSky.textContent = currentCitySky;
 };
 
 const cityNameInput = document.getElementById('cityNameInput');
@@ -148,12 +149,8 @@ const registerEventHandlers = () => {
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
 
-    const selectSkyOption = document.getElementById('skySelect'); 
-    selectSkyOption.addEventListener('change', (event) => {
-        const selectedOption = event.target.value;
-        console.log(selectedOption)
-        citySky(selectedOption);
-    });
+    const selectSkyOption = document.getElementById('skySelect');
+    selectSkyOption.addEventListener('change', citySky);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
