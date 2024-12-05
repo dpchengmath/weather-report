@@ -92,7 +92,7 @@ const fetchCityTemperature = () => {
 
     if (cityName) { 
         console.log(`Fetching city: ${cityName}`);
-        axios.get(`https://ada-weather-report-proxy-server.onrender.com`, {
+        axios.get(`https://ada-weather-report-proxy-server.onrender.com/location`, {
             params: {
                 q: cityName
             }
@@ -105,7 +105,7 @@ const fetchCityTemperature = () => {
                 const longitude = firstResult.lon;
                 console.log(`Coordinates: lat=${latitude}, lon=${longitude}`);
         
-                return axios.get(`https://ada-weather-report-proxy-server.onrender.com`, {
+                return axios.get(`https://ada-weather-report-proxy-server.onrender.com/weather`, {
                     params:{
                         lat: latitude,
                         lon: longitude
@@ -151,6 +151,7 @@ const registerEventHandlers = () => {
 
     const selectSkyOption = document.getElementById('skySelect');
     selectSkyOption.addEventListener('change', citySky);
+
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
