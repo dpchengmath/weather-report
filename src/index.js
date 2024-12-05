@@ -7,14 +7,15 @@ const updateTemperatureDisplay = () => {
     tempFontColor();
 };
 
+
 const addDegree = () => {
     const increaseTemp = document.getElementById('tempValue');
     currentTemperature += 1;
     increaseTemp.textContent = currentTemperature;
     updateTemperatureDisplay();
     tempLandscape();
-
 };
+
 
 const subtractDegree = () => {
     const decreaseTemp = document.getElementById('tempValue');
@@ -23,6 +24,7 @@ const subtractDegree = () => {
     updateTemperatureDisplay();
     tempLandscape();
 };
+
 
 const tempBackgroundColor = () => {
     const setBackgroundColor = document.getElementById('currentTempButton');
@@ -41,6 +43,7 @@ const tempBackgroundColor = () => {
     }
     setBackgroundColor.style.backgroundColor = currentBackgroundColor;
 };
+
 
 const tempFontColor = () => {
     const setFontColor = document.getElementById('tempValue');
@@ -65,16 +68,33 @@ const tempLandscape = () => {
     const setLandscape = document.getElementById('landscape');
     let currentLandscape = '';
 
-    if (currentTemperature <= 59) {
+    if (currentTemperature <= 39) {
         currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
-    } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
+    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
         currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-    } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
+    } else if (currentTemperature >= 60 && currentTemperature <= 79 ) {
         currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     } else if (currentTemperature >= 80) {
         currentLandscape= '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
     }
     setLandscape.textContent = currentLandscape;
+};
+
+
+const citySky = (skyOption) => {
+    const setSky = document.getElementById('sky');
+    let currentCitySky = '';
+
+    if (skyOption === 'sunny') {
+        currentCitySky = '☀️ ☁️ ☀️ ☀️ ☁️ ☀️ ☁️ ☀️ ☀️ ☁️ ☀️';
+    } else if (skyOption === 'cloudy') {
+        currentCitySky = '☁️☁️☁️ ☁️ ☁️☁️ ☁️ 🌤 ☁️ ☁️☁️☁️';
+    } else if (skyOption === 'rainy') {
+        currentCitySky = '🌧🌈⛈🌧🌧💧⛈🌧🌦🌧💧🌧🌧';
+    } else if (skyOption === 'snowy') {
+        currentCitySky = '🌨❄️🌨🌨❄️❄️🌨❄️🌨❄️❄️🌨🌨';
+    }
+    setSky.textContent = currentCitySky;
 };
 
 
@@ -85,17 +105,15 @@ const dynamicCityNameHeader = () => {
     cityHeaderElement.innerText = cityNameInput.value;
 };
 
-// const resetCityName = () => {
-//     const cityNameInput = document.getElementById('cityNameInput');
-//     const cityHeaderElement = document.getElementById('defaultHeaderCityName');
+
+const resetCityName = () => {
+    const cityNameInput = document.getElementById('cityNameInput');
+    const cityHeaderElement = document.getElementById('defaultHeaderCityName');
     
-//     cityNameInput.value = ''; 
-//     cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
-// };
+    cityNameInput.value = ''; 
+    cityHeaderElement.innerText = '🌸🗼🍜🍣🌋🐬🌊🐢🌺🍍🌴🗽🍕🗼🥐';
+};
 
-// const axios = require('axios');
-
-// axios.get('http://127.0.0.1:5000/location')
 
 const fetchCityTemperature = () => {
     const cityNameInput = document.getElementById('cityNameInput'); 
@@ -126,14 +144,15 @@ const fetchCityTemperature = () => {
             .then(weatherResponse => {
                 console.log('Weather Response:', weatherResponse);
                 const firstWeatherResult = weatherResponse.data.main.temp;
-                const kToF = (firstWeatherResult - 275.15) * 1.8 + 32;
-                console.log(Math.floor(kToF))
+                const kelvinToFahrenheit = (firstWeatherResult - 275.15) * 1.8 + 32;
+                console.log(Math.floor(kelvinToFahrenheit))
                 
                 const cityTempValue = document.getElementById('tempValue'); 
-                const cityTemp = Math.floor(kToF); 
-                cityTempValue.innerText = cityTemp;
-        
-                // updateTemperatureDisplay();
+                const cityTemp = Math.floor(kelvinToFahrenheit); 
+                cityTempValue.textContent = cityTemp;
+
+                currentTemperature = cityTemp;
+                updateTemperatureDisplay();
                 tempLandscape();
             })
             .catch(error => {
@@ -145,11 +164,14 @@ const fetchCityTemperature = () => {
     }
 };
 
+<<<<<<< HEAD
 const resetCityNameButton = () => {
     const cityNameInput = document.getElementById('cityNameInput');
     cityNameInput.innerText = 'Miami';
     fetchCityTemperature();
 }
+=======
+>>>>>>> 75d8a3a17420aec6bf635efeb32363071cfd5600
 
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
@@ -158,20 +180,29 @@ const registerEventHandlers = () => {
     const decreaseTempButton = document.querySelector('#decreaseTempControl');
     decreaseTempButton.addEventListener('click', subtractDegree);
 
-    const cityNameInput = document.querySelector('#cityNameInput');
-    // const cityNameResetButton = document.querySelector('#cityNameReset');
-
     cityNameInput.addEventListener('input', dynamicCityNameHeader);
-    // cityNameResetButton.addEventListener('click', resetCityName);
+    
+    const cityNameReset = document.querySelector('#cityNameReset');
+    cityNameReset.addEventListener('click', resetCityName);
 
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
+<<<<<<< HEAD
     
     const updateDegree = document.getElementById('tempValue'); 
     searchTempButton.addEventListener('click', fetchCityTemperature);
 
     const resetCityName = document.querySelector('#cityNameReset')
     resetCityName.addEventListener('click', resetCityNameButton);
+=======
+
+    const selectSkyOption = document.getElementById('skySelect'); 
+    selectSkyOption.addEventListener('change', (event) => {
+        const selectedOption = event.target.value;
+        console.log(selectedOption)
+        citySky(selectedOption);
+    });
+>>>>>>> 75d8a3a17420aec6bf635efeb32363071cfd5600
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
