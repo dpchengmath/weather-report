@@ -11,19 +11,13 @@ const addDegree = () => {
     currentTemperature += 1;
     tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
-    // tempLandscape();
 };
 
 const subtractDegree = () => {
     currentTemperature -= 1;
     tempValue.textContent = currentTemperature;
     updateTemperatureDisplay();
-    // tempLandscape();
 };
-
-
-
-
 
 const tempColor = () => {
     const setBackgroundColor = document.getElementById('currentTempButton');
@@ -117,7 +111,6 @@ const fetchCityTemperature = () => {
 
                 currentTemperature = cityTemp;
                 updateTemperatureDisplay();
-                // tempLandscape();
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -145,9 +138,6 @@ const registerEventHandlers = () => {
 
     const selectSkyOption = document.getElementById('skySelect');
     selectSkyOption.addEventListener('change', citySky);
-
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
-
-
