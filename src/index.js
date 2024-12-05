@@ -111,7 +111,6 @@ const fetchCityTemperature = () => {
 
                 currentTemperature = cityTemp;
                 updateTemperatureDisplay();
-                tempLandscape();
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
