@@ -3,8 +3,7 @@ let currentTemperature = 0;
 const updateTemperatureDisplay = () => {
     const tempValue = document.getElementById('tempValue');
     tempValue.textContent = currentTemperature;
-    tempBackgroundColor();
-    tempFontColor();
+    tempColor();
 };
 
 
@@ -26,42 +25,45 @@ const subtractDegree = () => {
 };
 
 
-const tempBackgroundColor = () => {
+const tempColor = () => {
     const setBackgroundColor = document.getElementById('currentTempButton');
-    let currentBackgroundColor;
 
-    if (currentTemperature <= 49) {
-        currentBackgroundColor = '#008080';
-    } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
-        currentBackgroundColor = '#008000';
-    } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
-        currentBackgroundColor = '#ffff00';
-    } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
-        currentBackgroundColor = '#ffa500';
-    } else if (currentTemperature >= 80) {
-        currentBackgroundColor = '#ff0000';
-    }
-    setBackgroundColor.style.backgroundColor = currentBackgroundColor;
-};
-
-
-const tempFontColor = () => {
     const setFontColor = document.getElementById('tempValue');
-    let currentFontColor;
+    let currentColor;
 
     if (currentTemperature <= 49) {
-        currentFontColor = '#00ced1';
+        currentColor = '#30849D';
     } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
-        currentFontColor = '#00ff7f';
+        currentColor = '#50A63F';
     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
-        currentFontColor = '#ffd700';
+        currentColor = '#FEE086';
     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
-        currentFontColor = '#ff7f50';
+        currentColor = '#F8B5A2';
     } else if (currentTemperature >= 80) {
-        currentFontColor = '#ff335a';
+        currentColor = '#E06767';
     }
-    setFontColor.style.color = currentFontColor;
+    setBackgroundColor.style.backgroundColor = currentColor;
+    setFontColor.style.color = currentColor;
 };
+
+
+// const tempFontColor = () => {
+//     const setFontColor = document.getElementById('tempValue');
+//     let currentFontColor;
+
+//     if (currentTemperature <= 49) {
+//         currentFontColor = '#00ced1';
+//     } else if (currentTemperature >= 50 && currentTemperature <= 59 ) {
+//         currentFontColor = '#00ff7f';
+//     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
+//         currentFontColor = '#ffd700';
+//     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
+//         currentFontColor = '#ff7f50';
+//     } else if (currentTemperature >= 80) {
+//         currentFontColor = '#ff335a';
+//     }
+//     setFontColor.style.color = currentFontColor;
+// };
 
 
 const tempLandscape = () => {
@@ -164,14 +166,6 @@ const fetchCityTemperature = () => {
     }
 };
 
-<<<<<<< HEAD
-const resetCityNameButton = () => {
-    const cityNameInput = document.getElementById('cityNameInput');
-    cityNameInput.innerText = 'Miami';
-    fetchCityTemperature();
-}
-=======
->>>>>>> 75d8a3a17420aec6bf635efeb32363071cfd5600
 
 const registerEventHandlers = () => {
     const increaseTempButton = document.querySelector('#increaseTempControl');
@@ -187,14 +181,6 @@ const registerEventHandlers = () => {
 
     const searchTempButton = document.getElementById('currentTempButton'); 
     searchTempButton.addEventListener('click', fetchCityTemperature)
-<<<<<<< HEAD
-    
-    const updateDegree = document.getElementById('tempValue'); 
-    searchTempButton.addEventListener('click', fetchCityTemperature);
-
-    const resetCityName = document.querySelector('#cityNameReset')
-    resetCityName.addEventListener('click', resetCityNameButton);
-=======
 
     const selectSkyOption = document.getElementById('skySelect'); 
     selectSkyOption.addEventListener('change', (event) => {
@@ -202,7 +188,6 @@ const registerEventHandlers = () => {
         console.log(selectedOption)
         citySky(selectedOption);
     });
->>>>>>> 75d8a3a17420aec6bf635efeb32363071cfd5600
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);

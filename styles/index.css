@@ -8,9 +8,9 @@ grid-template-columns: 1fr 2fr;
 grid-template-rows: auto auto auto auto;
 grid-gap: 1rem;
 
-font-family: "Rubik", sans-serif;
+font-family: "Avenir";
 font-size: 18px;
-background-color: #ffafd3;
+background-color: #999DC0;
 margin: 2rem;
 }
 
@@ -115,7 +115,7 @@ justify-content: space-between;
 
 border-radius: 8px;
 font-size: 2em;
-background-color: #afd0ff;
+background-color: #8ABED4;
 }
 
 .city-name__reset-btn {
