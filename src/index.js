@@ -2,7 +2,7 @@ let currentTemperature = 0;
 
 const tempValue = document.getElementById('tempValue');
 
-const updateTemperatureDisplay = () => {
+const temperatureDisplay = () => {
     tempValue.textContent = currentTemperature;
     tempColor();
 };
@@ -10,22 +10,23 @@ const updateTemperatureDisplay = () => {
 const addDegree = () => {
     currentTemperature += 1;
     tempValue.textContent = currentTemperature;
-    updateTemperatureDisplay();
-    tempLandscape();
+    temperatureDisplay();
 };
 
 const subtractDegree = () => {
     currentTemperature -= 1;
     tempValue.textContent = currentTemperature;
-    updateTemperatureDisplay();
-    tempLandscape();
+    temperatureDisplay();
 };
 
 const tempColor = () => {
-    const setBackgroundColor = document.getElementById('currentTempButton');
+    const BackgroundColor = document.getElementById('currentTempButton');
 
-    const setFontColor = document.getElementById('tempValue');
+    const elementFontColor = document.getElementById('tempValue');
     let currentColor;
+    
+    const elementLandscape = document.getElementById('landscape');
+    let currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
 
     if (currentTemperature <= 49) {
         currentColor = '#30849D';
@@ -33,29 +34,17 @@ const tempColor = () => {
         currentColor = '#50A63F';
     } else if (currentTemperature >= 60 && currentTemperature <= 69 ) {
         currentColor = '#FEE086';
+        currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
     } else if (currentTemperature >= 70 && currentTemperature <= 79 ) {
         currentColor = '#F8B5A2';
-    } else if (currentTemperature >= 80) {
-        currentColor = '#E06767';
-    }
-    setBackgroundColor.style.backgroundColor = currentColor;
-    setFontColor.style.color = currentColor;
-};
-
-const tempLandscape = () => {
-    const setLandscape = document.getElementById('landscape');
-    let currentLandscape = '';
-
-    if (currentTemperature <= 39) {
-        currentLandscape = '🌲🌲⛄️🌲⛄️🍂🌲🍁🌲🌲⛄️🍂🌲';
-    } else if (currentTemperature >= 40 && currentTemperature <= 59 ) {
-        currentLandscape = '🌾🌾_🍃_🪨__🛤_🌾🌾🌾_🍃';
-    } else if (currentTemperature >= 60 && currentTemperature <= 79 ) {
         currentLandscape = '🌸🌿🌼__🌷🌻🌿_☘️🌱_🌻🌷';
     } else if (currentTemperature >= 80) {
-        currentLandscape= '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
+        currentColor = '#E06767';
+        currentLandscape = '🌵__🐍_🦂_🌵🌵__🐍_🏜_🦂';
     }
-    setLandscape.textContent = currentLandscape;
+    BackgroundColor.style.backgroundColor = currentColor;
+    elementFontColor.style.color = currentColor;
+    elementLandscape.textContent = currentLandscape;
 };
 
 const citySky = (event) => {
@@ -97,9 +86,9 @@ const fetchCityTemperature = () => {
                 q: cityName
             }
         })
+        
         .then(response => {
             console.log('Location Data:', response);
-            
                 const firstResult = response.data[0];  
                 const latitude = firstResult.lat;
                 const longitude = firstResult.lon;
@@ -113,17 +102,14 @@ const fetchCityTemperature = () => {
                 })
         })
             .then(weatherResponse => {
-                console.log('Weather Response:', weatherResponse);
                 const firstWeatherResult = weatherResponse.data.main.temp;
                 const kelvinToFahrenheit = (firstWeatherResult - 275.15) * 1.8 + 32;
-                console.log(Math.floor(kelvinToFahrenheit))
                  
                 const cityTemp = Math.floor(kelvinToFahrenheit); 
                 tempValue.textContent = cityTemp;
 
                 currentTemperature = cityTemp;
-                updateTemperatureDisplay();
-                tempLandscape();
+                temperatureDisplay();
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -151,7 +137,6 @@ const registerEventHandlers = () => {
 
     const selectSkyOption = document.getElementById('skySelect');
     selectSkyOption.addEventListener('change', citySky);
-
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
