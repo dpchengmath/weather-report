@@ -11,6 +11,7 @@ grid-gap: 1rem;
 font-family: "Avenir";
 font-size: 18px;
 background-color: #999DC0;
+background-image: url(../ada-project-docs/images/background.jpg);
 margin: 2rem;
 }
 
@@ -50,16 +51,23 @@ color:#3E2F84;
 grid-row: 2;
 }
 
-.temperature__section button {
-background-color: #ac8aff;
-border: none;
-color: white;
-padding: 15px 32px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-border-radius: 10px
+.temperature__section button,
+#skySelect,
+#cityNameReset {
+    background-color: #c2fbd7;
+    border-radius: 100px;
+    color: blueviolet;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Avenir;
+    padding: 7px 20px;
+    text-align: center;
+    border: 0;
+    font-size: 16px; 
+}
+
+button:hover {
+  transform: scale(1.05) rotate(-1deg);
 }
 
 .sky__section {
@@ -115,16 +123,7 @@ justify-content: space-between;
 
 border-radius: 8px;
 font-size: 2em;
-background-color: #8ABED4;
-}
-
-.city-name__reset-btn {
-border: 0;
-background-color: #ac8aff;
-color: white;
-border-radius: 8px;
-padding: 1rem;
-font-family: "Avenir";
+background-color: #DBF7FF;
 }
 
 .red {
